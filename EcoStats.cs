@@ -29,11 +29,11 @@ namespace EcoStats
 
         UIView boxUIView;
         UIButton btnEcoStats;
-        UILabel lblCityStats;
+        static UILabel lblCityStats;
 
-        bool statsShown = false;
+        static bool statsShown = false;
 
-        Stats stats;
+        static Stats stats;
 
         public override void OnLevelLoaded(LoadMode mode)
         {
@@ -64,9 +64,18 @@ namespace EcoStats
 
             btnEcoStats.eventClick += BtnClickedEcoStats;
 
-            var autoEvent = new AutoResetEvent(false);
-            Timer threadUpdateStats = new Timer(updateStats, autoEvent, 1000, 5000);
+            updateStats();
 
+        }
+
+        public class Economy : EconomyExtensionBase
+        {
+            public override long OnUpdateMoneyAmount(long internalMoneyAmount)
+            {
+                DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Update money amount...");
+                updateStats();
+                return base.OnUpdateMoneyAmount(internalMoneyAmount);
+            }
         }
 
         private void BtnClickedEcoStats(UIComponent component, UIMouseEventParameter eventParam)
@@ -95,14 +104,13 @@ namespace EcoStats
 
         }
 
-        private void updateStats(System.Object stateInfo)
+        public static void updateStats()
         {
             DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Will check if should update stats...");
             if (statsShown)
             {
                 DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Update stats");
                 stats = new Stats();
-
                 lblCityStats.text = stats.ToString();
             }
         }
