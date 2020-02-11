@@ -66,7 +66,7 @@ namespace EcoStats
             this.privateSpending = expendableIncome;
             this.govtSpending = governmentExpenses;
 
-            this.population = Singleton<PopulationInfoViewPanel>.instance.population;
+            this.population = Singleton<CitizenManager>.instance.m_citizenCount;
 
             //GDP PER CAPITA
             if (this.population == 0)

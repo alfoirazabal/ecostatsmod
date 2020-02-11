@@ -72,7 +72,7 @@ namespace EcoStats
         {
             public override long OnUpdateMoneyAmount(long internalMoneyAmount)
             {
-                DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Update money amount...");
+                //DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Update money amount...");
                 updateStats();
                 return base.OnUpdateMoneyAmount(internalMoneyAmount);
             }
@@ -88,7 +88,7 @@ namespace EcoStats
                 lblCityStats = (UILabel)boxUIView.AddUIComponent(typeof(UILabel));
 
                 stats = new Stats();
-                DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Eco Stats: \n" + stats);
+                //DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Eco Stats: \n" + stats);
 
                 var uiView = GameObject.FindObjectOfType<UIView>();
                 if (uiView == null) return;
@@ -106,12 +106,18 @@ namespace EcoStats
 
         public static void updateStats()
         {
-            DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Will check if should update stats...");
+            //DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Will check if should update stats...");
             if (statsShown)
             {
-                DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Update stats");
-                stats = new Stats();
-                lblCityStats.text = stats.ToString();
+                //DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Update stats");
+                try
+                {
+                    stats = new Stats();
+                    lblCityStats.text = stats.ToString();
+                } catch (NullReferenceException ex)
+                {
+                    //Do nothing...
+                }
             }
         }
 
