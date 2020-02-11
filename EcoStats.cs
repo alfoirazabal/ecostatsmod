@@ -70,10 +70,19 @@ namespace EcoStats
 
         public class Economy : EconomyExtensionBase
         {
+            byte checkerIntervalAmount = 0; //Check every 3 Money Updates
             public override long OnUpdateMoneyAmount(long internalMoneyAmount)
             {
-                //DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Update money amount...");
-                updateStats();
+                if(checkerIntervalAmount == 2)
+                {
+                    //DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "Update money amount...");
+                    updateStats();
+                    checkerIntervalAmount = 0;
+                }
+                else
+                {
+                    checkerIntervalAmount++;
+                }
                 return base.OnUpdateMoneyAmount(internalMoneyAmount);
             }
         }
