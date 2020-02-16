@@ -87,7 +87,7 @@ namespace EcoStats
             for (int i = 0; i < buildingManager.m_buildings.m_size; i++)
             {
                 BuildingInfo info = buildingManager.m_buildings.m_buffer[i].Info;
-                byte level = buildingManager.m_buildings.m_buffer[i].m_level;
+                byte level = buildingManager.m_buildings.m_buffer[i].m_level;                
                 if (info.GetService() == ItemClass.Service.Residential)
                 {
                     byte citizenCount = buildingManager.m_buildings.m_buffer[i].m_citizenCount;
