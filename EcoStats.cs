@@ -29,6 +29,8 @@ namespace EcoStats
 
         UIView boxUIView;
         UIButton btnEcoStats;
+        UIDragHandle dh;
+
         static UILabel lblCityStats;
 
         static bool statsShown = false;
@@ -41,7 +43,7 @@ namespace EcoStats
             boxUIView = UIView.GetAView();
             btnEcoStats = (UIButton)boxUIView.AddUIComponent(typeof(UIButton));
 
-            UIDragHandle dh = (UIDragHandle)boxUIView.AddUIComponent(typeof(UIDragHandle));
+            dh = (UIDragHandle)boxUIView.AddUIComponent(typeof(UIDragHandle));
 
             var uiView = GameObject.FindObjectOfType<UIView>();
             if (uiView == null) return;
